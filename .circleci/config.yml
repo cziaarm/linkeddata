@@ -7,13 +7,30 @@ orbs:
   samvera: samvera/circleci-orb@0
 jobs:
   build:
+    parameters:
+      ruby_version:
+        type: string
+      
     executor:
       name: 'samvera/ruby'
-      ruby_version: "2.5.7"
+      ruby_version: << parameters.ruby_version >>
 
     steps:
       - samvera/cached_checkout
       - samvera/bundle_for_gem:
-          ruby_version: "2.5.7"
+          ruby_version: << parameters.ruby_version >>
           project: linkeddata
       - samvera/parallel_rspec
+workflows:
+  version: 2
+  ci:
+    jobs:
+      - build:
+          name: "ruby2-4"
+          ruby_version: "2.4.9"
+      - build:
+          name: "ruby2-5"
+          ruby_version: "2.5.7"
+      - build:
+          name: "ruby2-6"
+          ruby_version: "2.6.5"

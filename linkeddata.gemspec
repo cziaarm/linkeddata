@@ -48,5 +48,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rspec',               '~> 3.7'
   gem.add_development_dependency 'rspec-its',           '~> 1.2'
   gem.add_development_dependency 'rdf-spec',            '~> 3.0'
+  gem.add_development_dependency "rspec_junit_formatter"
   gem.post_install_message       = nil
 end
